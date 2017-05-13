@@ -16,26 +16,7 @@
 <!--自动扫描-->
   <context:component-scan base-package="com.my.ssm"/>
    <bean class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor"></bean>
-    <!--加载数据库信息-->
-    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
-        <property name="location" value="classpath:jdbc.properties"></property>
-    </bean>
-    <bean id="dataSource" class="org.springframework.jdbc.datasource.DriverManagerDataSource">
-        <property name="driverClassName" value="${jdbc.driver}"></property>
-        <property name="url" value="${jdbc.url}"></property>
-        <property name="username" value="${jdbc.username}"></property>
-        <property name="password" value="${jdbc.password}"></property>
-    </bean>
-    <!--整合MyBitas-->
-    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
-        <property name="dataSource" ref="dataSource"></property>
-        <property name="mapperLocations" value="classpath:mapping/*.xml"></property>
-    </bean>
-    <!--查找Dao接口-->
-    <bean  class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.my.ssm.dao"></property>
-        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
-    </bean>
+    <import resource="spring-myBatis.xml"/>
     <!--事物管理-->
         <!--事务管理实现类-->
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
