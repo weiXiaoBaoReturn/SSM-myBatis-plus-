@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.my.ssm.dao.SysOfficeDao">
+
+<select id="selectOffice" resultType="com.my.ssm.entity.SysOffice">
+    SELECT
+      o.id,
+      o.parent_id AS "parentId",
+      o.parent_ids AS  "parentIds",
+      o.name AS  "name"
+    FROM sys_office o
+</select>
+</mapper>
