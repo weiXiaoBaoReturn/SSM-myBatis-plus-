@@ -24,19 +24,26 @@ import java.util.List;
 public class SysOfficeController {
     @Resource
     private SysOfficeService sysOfficeService;
-    @RequestMapping("selectOffice")
-    public String toIndex(HttpServletRequest request, Model model){
-        List<SysOffice> sysOffice = sysOfficeService.getOffice();
-        for(SysOffice office:sysOffice){
-            System.out.println("单位名称："+office.getName());
-        }
+        @RequestMapping("selectOffice")
+    public List<SysOffice> selectOffice(HttpServletRequest request, Model model){
+        List<SysOffice> sysOffice = sysOfficeService.getOfficeByBaseMapper();
         model.addAttribute("offices", sysOffice);
-        return "selectOffice";
+        return sysOffice;
     }
-
+    //查询所有单位
     @RequestMapping(value = "selectAllOffice",method = RequestMethod.POST)
     public List<SysOffice> selectAllOffice(Model model){
-        List<SysOffice> sysOffice = sysOfficeService.getOffice();
+        List<SysOffice> sysOffice = sysOfficeService.getAllOffice();
         return sysOffice;
+    }
+    //返回模型和视图
+    @RequestMapping(value = "selectOfficeByName")
+    public ModelAndView getResult(ModelMap model,@ModelAttribute SysOffice sysOfficeParam){
+        SysOffice sysOffice =sysOfficeService.selectOfficeByName(sysOfficeParam.getName());
+        if(sysOffice!=null){
+            model.addAttribute("id",sysOffice.getId());
+            model.addAttribute("name",sysOffice.getName());
+        }
+        return new ModelAndView("result",model);
     }
 }
