@@ -11,6 +11,7 @@ import java.util.List;
  */
 
 public class TestSpringMyBatis {
+    //测试spring和myBatis的整合
     @Test
     public  void testMyBatis(){
        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("spring.xml");
